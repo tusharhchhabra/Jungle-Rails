@@ -4,10 +4,36 @@
     <h1>Order #<%= @order.id %></h1>
   </header>
 
-  <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+  <div class="order-summary jumbotron text-center mb-5">
+    <h4>Thank you!</h4>
+    <p>Your order has been placed.</p>
   </div>
 
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.line_items.each do |line_item| %>
+        <%= render partial: 'line_item', locals: {line_item: line_item} %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="text-right">
+    <strong>Total Amount: </strong><%= humanized_money_with_symbol @order.total_cents / 100.0 %>
+  </div>
+
+  <div class="mt-4">
+    <strong>Email: </strong><%= @order.email %>
+  </div>
+
+  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary mt-4' %>
 
 </section>
