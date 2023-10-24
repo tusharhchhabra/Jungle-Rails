@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 beforeEach(() => {
-  cy.visit("127.0.0.1:3000");
+  cy.visit("/");
 });
 
 it("There are 2 products on the page", () => {
